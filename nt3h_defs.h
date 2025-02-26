@@ -81,6 +81,7 @@ extern "C" {
  */
 typedef enum {
     NT3H_OK,
+    NT3H_ERROR,
     NT3H_E_NULL_PTR,
     NT3H_E_DEV_NOT_FOUND,
     NT3H_E_INVALID_ARGS,
