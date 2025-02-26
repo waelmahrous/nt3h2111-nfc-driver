@@ -46,6 +46,9 @@
 #define CAPABILITY_MLEN         0x0000FF00U
 #define CAPABILITY_ADDITIONAL   0x000000FFU
 
+/* Custom defines */
+#define MAX_BLOCKS 10   /* Maximum block size during read/write operations */
+
 /*
  * @brief Structure determining size of r/w operations.
  */
@@ -60,6 +63,8 @@ static const nt3h_block_t factory_value_block_56 = { NT3H_FACTORY_VALUE_BLOCK_56
 static const nt3h_block_t factory_value_block_57 = { NT3H_FACTORY_VALUE_BLOCK_57 };
 static const nt3h_block_t factory_value_block_58 = { NT3H_FACTORY_VALUE_BLOCK_58 };
 
+/* Memory blocks for read/write operations */
+static nt3h_block_t blocks[MAX_BLOCKS];
 
 /*!
  * @brief Read block(s) of data from NT3H memory.
@@ -199,8 +204,6 @@ nt3h_status_t nt3h_read_bytes(nt3h_dev_t *dev, uint16_t addr, uint16_t offset, u
     /* Calculate the number of blocks needed to cover this r/w operation. */
     uint8_t blocks_needed = calculate_blocks_needed(offset, len);
     
-    nt3h_block_t blocks[blocks_needed];
-
     if ((rslt = read_blocks(dev, addr, blocks, blocks_needed)) != NT3H_OK)
         return rslt;
 
@@ -232,8 +235,6 @@ nt3h_status_t nt3h_write_bytes(nt3h_dev_t *dev, uint16_t addr, uint16_t offset, 
 
     /* Calculate the number of blocks needed to cover this r/w operation. */
     uint8_t blocks_needed = calculate_blocks_needed(offset, len);
-
-    nt3h_block_t blocks[blocks_needed];
 
     if ((rslt = read_blocks(dev, addr, blocks, blocks_needed)) != NT3H_OK)
         return rslt;
@@ -269,8 +270,6 @@ nt3h_status_t nt3h_erase_bytes(nt3h_dev_t *dev, uint16_t addr, uint16_t offset, 
 
     /* Calculate the number of blocks needed to cover this r/w operation. */
     uint8_t blocks_needed = calculate_blocks_needed(offset, len);
-
-    nt3h_block_t blocks[blocks_needed];
 
     if ((rslt = read_blocks(dev, addr, blocks, blocks_needed)) != NT3H_OK)
         return rslt;
