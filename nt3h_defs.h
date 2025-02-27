@@ -49,7 +49,7 @@ extern "C" {
 #define NTAG_1K
 #define NTAG_2K
 
-#define NT3H_DEFAULT_I2C_ADDRESS        0x40
+#define NT3H_DEFAULT_I2C_ADDRESS        0x55
 
 #define NT3H_MEM_BLOCK_CONFIG_1K        0x3A
 #define NT3H_MEM_BLOCK_SESSION_REGS_1K  0xFE
