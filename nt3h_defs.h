@@ -85,6 +85,8 @@ typedef enum {
     NT3H_E_NULL_PTR,
     NT3H_E_DEV_NOT_FOUND,
     NT3H_E_INVALID_ARGS,
+    NT3H_E_CC_READ,
+    NT3H_E_CC_WRITE,
 } nt3h_status_t;
 
 /*!
